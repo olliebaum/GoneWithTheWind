@@ -6,8 +6,13 @@ import org.scalatest.Matchers._
 class LibrarySpec extends FunSuite {
 
   test("Library #searchTitle can find a book by partial title") {
-    val libr1 = new Library()
-    libr1.searchTitle("Code")(0).title shouldBe "Da Vinci Code,The"
+    val library1 = new Library()
+    library1.searchTitle("Code")(0).title shouldBe "Da Vinci Code,The"
+  }
+
+  test("Library #searchAuthor can find a book by partial name") {
+    val library1 = new Library()
+    library1.searchAuthor("Mosse")(0).title shouldBe "Labyrinth"
   }
 
 }
