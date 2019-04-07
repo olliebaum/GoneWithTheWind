@@ -1,92 +1,22 @@
-# Gone With The Wind
+# GoneWithTheWind
+Tech test for KiwiPower. A simple library applications that allows for managing of books.
 
-## Instructions
+- There are two classes: `Library` and `Book`
+- `Books` is an object containing a list of books under the attribute `all`
 
-You have a library of books and are offering them to the world - you are lending so many books now that it is becoming hard to keep track of what you have.  You decided to use your programming fu to build an application which can keep track of them for you.
+## Usage
+```scala
+// First create a new library
+scala> val library1 = new com.company.library.Library()
+--> library1: com.company.library.Library = com.company.library.Library@...
 
-##### Getting started
+// Search your library by book title
+scala> library1.searchTitle("Code")
+Da Vinci Code,The by Brown, Dan
+--> res0: List[com.company.library.Book] = List(Book(Da Vinci Code,The,Brown, Dan,pidtkl))
 
-* clone the project
-* import via IntelliJ IDEA
-
-##### Requirements
-
-* implements the user stories listed below (optional ones not required)
-* compiles
-* has tests
-* frequent commits
-
-##### User Stories
-
-```text
-As a visitor,
-So that I can find books I am looking for,
-I need to be able search books by partial title
+// Search your library by book author
+scala> library1.searchAuthor("Mosse")
+Labyrinth by Mosse, Kate
+--> res1: List[com.company.library.Book] = List(Book(Labyrinth,Mosse, Kate,hlpumcxw))
 ```
-
-```text
-As a visitor,
-So that I can find books I am looking for,
-I need to be able search books by partial author
-```
-
-```text
-As a visitor,
-So that I can find books I am looking for,
-I need to be able to search by full ISBN
-```
-
-```text
-As a librarian,
-So that I can help my community,
-I need to be able to lend books to visitors
-```
-
-```text
-As a librarian,
-So that I can protect my expensive books,
-I don't want to lend reference books
-```
-
-```text
-As a librarian,
-So that I can manage my library correctly,
-I need to know whether a book is available or on loan
-```
-
----
-
-##### Optional extra stories
-
-```text
-As a librarian,
-So that I can update my stock levels,
-I need to be able update the library when a book is returned 
-```
-
-```text
-As a librarian,
-So that I can manage my library correctly,
-I need to know who has a book that is on loan
-```
-
-```text
-As a librarian,
-So that I can manage my library correctly,
-I need to know which books are late
-```
-
-```text
-As a librarian,
-So that I can manage my library correctly,
-I need to know who has a book that is late
-```
-
-```text
-As a librarian,
-So that I can manage my library correctly,
-I want to fine users who are late returning their books
-
-```
-
-
