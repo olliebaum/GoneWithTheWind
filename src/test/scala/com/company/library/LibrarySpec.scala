@@ -15,9 +15,13 @@ class LibrarySpec extends FunSuite {
     library1.searchAuthor("Mosse")(0).title shouldBe "Labyrinth"
   }
 
-  test("Library #searchIsbn can find a book by full Isbn") {
+  test("Library #searchIsbn can find a book by full ISBN") {
     val library1 = new Library()
     library1.searchIsbn("nggzbsum")(0).title shouldBe "Life of Pi"
   }
 
+  test("Library #searchIsbn can't find a book by partial ISBN") {
+    val library1 = new Library()
+    library1.searchIsbn("nggzbsu") shouldBe List()
+  }
 }
