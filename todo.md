@@ -1,0 +1,1 @@
+- [ ] Possible refactor: Make universal search command that takes search field (i.e. `title`, `author`) as an argument.
