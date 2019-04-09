@@ -19,4 +19,13 @@ class Library {
       book
     }
   }
+  def searchIsbn(queryText: String): List[Book] = {
+    for {
+      book <- Books.all;
+      if(book.ISBN == queryText)
+    } yield {
+      println(book.title + " by " + book.author)
+      book
+    }
+  }
 }
