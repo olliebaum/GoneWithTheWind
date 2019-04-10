@@ -24,4 +24,5 @@ class LibrarySpec extends FunSuite {
     val library1 = new Library()
     library1.searchIsbn("nggzbsu") shouldBe List()
   }
+
 }

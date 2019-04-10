@@ -1,9 +1,8 @@
 package com.company.library
-import scala.collection.mutable.ListBuffer
 
 class Library {
 
-  private var loans = new ListBuffer[Loan]()
+  private var loans = scala.collection.mutable.Map[Book, String]()
 
   def searchTitle(queryText: String): List[Book] = {
     for {
@@ -33,6 +32,6 @@ class Library {
     }
   }
   def lend(bookToLend: Book, borrower: String) = {
-    loans += new Loan(bookToLend, borrower)
+    loans(bookToLend) = borrower
   }
 }
