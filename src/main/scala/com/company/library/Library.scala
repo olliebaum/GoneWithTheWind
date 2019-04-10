@@ -1,6 +1,10 @@
 package com.company.library
+import scala.collection.mutable.ListBuffer
 
 class Library {
+
+  private var loans = new ListBuffer[Loan]()
+
   def searchTitle(queryText: String): List[Book] = {
     for {
       book <- Books.all;
@@ -27,5 +31,8 @@ class Library {
       println(book.title + " by " + book.author)
       book
     }
+  }
+  def lend(bookToLend: Book, borrower: String) = {
+    loans += new Loan(bookToLend, borrower)
   }
 }

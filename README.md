@@ -21,7 +21,7 @@ Labyrinth by Mosse, Kate
 --> res1: List[com.company.library.Book] = List(Book(Labyrinth,Mosse, Kate,hlpumcxw))
 
 // Search your library by ISBN
-scala> library1.searchIsbn("nggzbsum")
+scala> library1.searchIsbn("nggzbsum") //N.B. Partial searches will return empty
 Life of Pi by Martel, Yann
 --> res2: List[com.company.library.Book] = List(Book(Life of Pi by Martel, Yann,nggzbsum))
 
