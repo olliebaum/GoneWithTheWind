@@ -1,12 +1,12 @@
 package com.company.library
 
-class Library {
+class Library(val books: List[Book] = Books.all) {
 
   private var loans = scala.collection.mutable.Map[Book, String]()
 
   def searchTitle(queryText: String): List[Book] = {
     for {
-      book <- Books.all;
+      book <- books;
       if(book.title contains queryText)
     } yield {
       println(book.title + " by " + book.author)
@@ -15,7 +15,7 @@ class Library {
   }
   def searchAuthor(queryText: String): List[Book] = {
     for {
-      book <- Books.all;
+      book <- books;
       if(book.author contains queryText)
     } yield {
       println(book.title + " by " + book.author)
@@ -24,7 +24,7 @@ class Library {
   }
   def searchIsbn(queryText: String): List[Book] = {
     for {
-      book <- Books.all;
+      book <- books;
       if(book.ISBN == queryText)
     } yield {
       println(book.title + " by " + book.author)
@@ -41,7 +41,7 @@ class Library {
     }
   }
 
-  def checkAvailable(book: Book):Boolean = {
+  def checkAvailable(book: Book): Boolean = {
     !loans.contains(book)
   }
 }

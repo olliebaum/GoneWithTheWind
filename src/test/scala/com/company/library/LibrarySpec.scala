@@ -8,7 +8,12 @@ class LibrarySpec extends FunSuite with BeforeAndAfter {
 
   var library1: Library = _
   before {
-    library1 = new Library()
+    library1 = new Library(List(
+      Book("Da Vinci Code,The", "Brown, Dan", "pidtkl"),
+      Book("Labyrinth", "Mosse, Kate", "hlpumcxw"),
+      Book("Life of Pi", "Martel, Yann", "nggzbsum"),
+      Book("Programming in Scala", "Odersky, Martin", "scygzxyc", true)
+    ))
   }
   test("Library #searchTitle can find a book by partial title") {
     library1.searchTitle("Code")(0).title shouldBe "Da Vinci Code,The"
@@ -27,25 +32,25 @@ class LibrarySpec extends FunSuite with BeforeAndAfter {
   }
 
   test("#checkAvailable is false when book is loaned out") {
-    library1.lend(Books.all(0), "Desmond Tutu")
-    library1.checkAvailable(Books.all(0)) shouldBe false
+    library1.lend(library1.books(0), "Desmond Tutu")
+    library1.checkAvailable(library1.books(0)) shouldBe false
   }
 
   test("#checkAvailable is true when book hasn't been loaned out") {
-    library1.checkAvailable(Books.all(0)) shouldBe true
+    library1.checkAvailable(library1.books(0)) shouldBe true
   }
 
   test("#lend throws exception when book is on loan") {
-    library1.lend(Books.all(0), "Desmond Tutu")
+    library1.lend(library1.books(0), "Desmond Tutu")
     val thrown = intercept[Exception] {
-      library1.lend(Books.all(0), "Jeremy Corbyn")
+      library1.lend(library1.books(0), "Jeremy Corbyn")
     }
     thrown.getMessage shouldBe "Book is already on loan!"
   }
 
   test("#lend throws exception if you try to loan a reference book") {
     val thrown = intercept[Exception] {
-      library1.lend(Books.all.last, "Theresa May")
+      library1.lend(library1.books.last, "Theresa May")
     }
     thrown.getMessage shouldBe "Reference books cannot be loaned out!"
   }
