@@ -36,6 +36,7 @@ class Library(val books: List[Book] = Books.all) {
       throw new Exception("Reference books cannot be loaned out!")
     } else if(checkAvailable(bookToLend)) {
       loans(bookToLend) = borrower
+      println(bookToLend.title + " lent to " + borrower)
     } else {
       throw new Exception("Book is already on loan!")
     }
