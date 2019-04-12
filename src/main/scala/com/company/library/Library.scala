@@ -4,33 +4,31 @@ class Library(val books: List[Book] = Books.all) {
 
   private var loans = scala.collection.mutable.Map[Book, String]()
 
-  def searchTitle(queryText: String): List[Book] = {
+  private def search(queryText: String, searchType: String): List[Book] = {
     for {
-      book <- books;
-      if(book.title contains queryText)
+      book <- books
+      searchField = searchType match {
+        case "title" => book.title
+        case "isbn" => book.ISBN
+        case "author" => book.author
+      }
+      if(searchField contains queryText)
     } yield {
       println(book.title + " by " + book.author)
       book
     }
+  }
+
+  def searchTitle(queryText: String): List[Book] = {
+    this.search(queryText, "title")
   }
   def searchAuthor(queryText: String): List[Book] = {
-    for {
-      book <- books;
-      if(book.author contains queryText)
-    } yield {
-      println(book.title + " by " + book.author)
-      book
-    }
+    this.search(queryText, "author")
   }
   def searchIsbn(queryText: String): List[Book] = {
-    for {
-      book <- books;
-      if(book.ISBN == queryText)
-    } yield {
-      println(book.title + " by " + book.author)
-      book
-    }
+    this.search(queryText, "isbn")
   }
+
   def lend(bookToLend: Book, borrower: String) = {
     if (bookToLend.isReference) {
       throw new Exception("Reference books cannot be loaned out!")

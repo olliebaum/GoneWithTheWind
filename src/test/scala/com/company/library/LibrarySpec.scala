@@ -27,10 +27,6 @@ class LibrarySpec extends FunSuite with BeforeAndAfter {
     library1.searchIsbn("nggzbsum")(0).title shouldBe "Life of Pi"
   }
 
-  test("Library #searchIsbn can't find a book by partial ISBN") {
-    library1.searchIsbn("nggzbsu") shouldBe List()
-  }
-
   test("#checkAvailable is false when book is loaned out") {
     library1.lend(library1.books(0), "Desmond Tutu")
     library1.checkAvailable(library1.books(0)) shouldBe false

@@ -25,7 +25,7 @@ scala> library1.searchAuthor("Mosse")
 --> res1: List[com.company.library.Book] = List(Book(Labyrinth,Mosse, Kate,hlpumcxw))
 
 // Search your library by ISBN
-scala> library1.searchIsbn("nggzbsum") //N.B. Partial searches will return empty
+scala> library1.searchIsbn("nggzbsum")
 -> Life of Pi by Martel, Yann
 --> res2: List[com.company.library.Book] = List(Book(Life of Pi by Martel, Yann,nggzbsum))
 
@@ -37,3 +37,6 @@ scala> library1.lend(library1.books(0), "Tom Hanks")
 scala> library1.checkAvailable(library1.books(0))
 --> res3: Boolean = false
 ```
+
+
+
