@@ -43,4 +43,10 @@ class LibrarySpec extends FunSuite with BeforeAndAfter {
     thrown.getMessage shouldBe "Book is already on loan!"
   }
 
+  test("#lend throws exception if you try to loan a reference book") {
+    val thrown = intercept[Exception] {
+      library1.lend(Books.all.last, "Theresa May")
+    }
+    thrown.getMessage shouldBe "Reference books cannot be loaned out!"
+  }
 }

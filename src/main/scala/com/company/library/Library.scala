@@ -32,7 +32,9 @@ class Library {
     }
   }
   def lend(bookToLend: Book, borrower: String) = {
-    if(checkAvailable(bookToLend)) {
+    if (bookToLend.isReference) {
+      throw new Exception("Reference books cannot be loaned out!")
+    } else if(checkAvailable(bookToLend)) {
       loans(bookToLend) = borrower
     } else {
       throw new Exception("Book is already on loan!")
