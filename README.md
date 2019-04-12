@@ -40,3 +40,14 @@ scala> library1.checkAvailable(library1.books(0))
 
 
 
+## Approach
+
+### #search
+
+I decided to use a for loop here after learning how the [Scala 'for' loop is different](https://stackoverflow.com/a/12084651/4215684) than in more declarative-approach languages and is converted to the equivalent of `list.filter(criteria).map(action)`. I could have simply used `filter` but decided to use `for` because it would allow me a simple and performant way to both add a found result to a list and to print the found result using a `yield` block. 
+
+I initially had a `for` loop for each #search...* method but refactored so they all use a common private #search method under the hood. I was hoping for a syntax similar to `foo["bar"]` found in javascript so I could dynamically search on a given variable, i.e. `book[searchType]`  where searchType is one of "title", "author" or "ISBN" given as an argument to the #search method. However, sadly this isn't a thing, so I instead used a  `match` /`case`statement as a definition inside my `for` loop which sets searchField to the value of `book.title`, `book.author` or `book.ISBN` as appropriate. This is perhaps a more secure solution anyway as it means other developers can only use the #search method for the explicitly allowed fields.
+
+### #lend
+
+Since we weren't using databases here I decided to use a Map type to store my data. One of the advantages of this is that I am able to use a syntax similar to a ruby hash or javascript object i.e. `foo["bar"]` allowing me to easily pass an argument variable to the Map to retrieve the relevant data easily. And in addition, I don't have to use a string, I can just simply use a `Book` object as my key meaning that finding a book's borrower is as simple as `loans(someBookObject)`. This approach works fine for simply remembering who a book is loaned to, but when loaned dates + due dates come in to play, it may be more useful to have some kind of Loan object that can handle more complex operations.
