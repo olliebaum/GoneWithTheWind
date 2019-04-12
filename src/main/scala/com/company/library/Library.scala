@@ -1,8 +1,13 @@
 package com.company.library
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter
 
 class Library(val books: List[Book] = Books.all) {
 
-  private var loans = scala.collection.mutable.Map[Book, String]()
+  private var loans = scala.collection.mutable.Map[Book, Map[String, String]]()
+
+  private val today = LocalDate.now()
+  private val todayStr = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
 
   private def search(queryText: String, searchType: String): List[Book] = {
     for {
@@ -29,11 +34,11 @@ class Library(val books: List[Book] = Books.all) {
     this.search(queryText, "isbn")
   }
 
-  def lend(bookToLend: Book, borrower: String): Unit = {
+  def lend(bookToLend: Book, borrower: String, date: String = todayStr): Unit = {
     if (bookToLend.isReference) {
       throw new Exception("Reference books cannot be loaned out!")
     } else if(checkAvailable(bookToLend)) {
-      loans(bookToLend) = borrower
+      loans(bookToLend) = Map("borrower" -> borrower, "loanDate" -> date)
       println(bookToLend.title + " lent to " + borrower)
     } else {
       throw new Exception("Book is already on loan!")
@@ -53,6 +58,18 @@ class Library(val books: List[Book] = Books.all) {
   }
 
   def getBorrower(bookOnLoan: Book): String = {
-    loans(bookOnLoan)
+    loans(bookOnLoan)("borrower")
+  }
+
+  def isOverdue(book: Book): Boolean = {
+    LocalDate.parse(loans(book)("loanDate")).plusDays(14).isBefore(today)
+  }
+
+  def getOverdue(): List[Book] = {
+    val overdueBooks = for {
+      (loanedBook, v) <- loans
+      if (isOverdue(loanedBook))
+    } yield {loanedBook}
+    overdueBooks.toList
   }
 }

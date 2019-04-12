@@ -61,4 +61,5 @@ class LibrarySpec extends FunSuite with BeforeAndAfter {
     library1.lend(library1.books(0), "Les Dawson")
     library1.getBorrower(library1.books(0)) shouldBe "Les Dawson"
   }
+
 }
