@@ -1,6 +1,6 @@
 package com.company.library
 
-class Library(val books: List[Book] = Books.all, bookClass = Book) {
+class Library(val books: List[Book] = Books.all) {
 
   private var loans = scala.collection.mutable.Map[Book, String]()
 
@@ -42,5 +42,13 @@ class Library(val books: List[Book] = Books.all, bookClass = Book) {
 
   def checkAvailable(book: Book): Boolean = {
     !loans.contains(book)
+  }
+
+  def giveBack(bookToReturn: Book): Unit = {
+    if (checkAvailable(bookToReturn)) {
+      throw new Exception("Book was not on loan in the first place!")
+    } else {
+      loans -= bookToReturn
+    }
   }
 }

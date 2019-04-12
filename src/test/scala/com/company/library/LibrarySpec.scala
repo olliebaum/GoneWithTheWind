@@ -50,4 +50,10 @@ class LibrarySpec extends FunSuite with BeforeAndAfter {
     }
     thrown.getMessage shouldBe "Reference books cannot be loaned out!"
   }
+
+  test("#giveBack makes a book available again") {
+    library1.lend(library1.books(0), "James Dean")
+    library1.giveBack(library1.books(0))
+    library1.checkAvailable(library1.books(0)) shouldBe true
+  }
 }
