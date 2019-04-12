@@ -34,4 +34,8 @@ class Library {
   def lend(bookToLend: Book, borrower: String) = {
     loans(bookToLend) = borrower
   }
+
+  def checkAvailable(book: Book):Boolean = {
+    !loans.contains(book)
+  }
 }

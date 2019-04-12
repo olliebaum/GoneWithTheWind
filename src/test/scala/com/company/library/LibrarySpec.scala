@@ -25,4 +25,14 @@ class LibrarySpec extends FunSuite {
     library1.searchIsbn("nggzbsu") shouldBe List()
   }
 
+  test("#checkAvailable is false when book is loaned out") {
+    val library1 = new Library()
+    library1.lend(Books.all(0), "Desmond Tutu")
+    library1.checkAvailable(Books.all(0)) shouldBe false
+  }
+
+  test("#checkAvailable is true when book hasn't been loaned out") {
+    val library1 = new Library()
+    library1.checkAvailable(Books.all(0)) shouldBe true
+  }
 }
