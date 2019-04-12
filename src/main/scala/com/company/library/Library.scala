@@ -77,4 +77,14 @@ class Library(val books: List[Book] = Books.all) {
     for {overdueBook <- getOverdue()} yield { getBorrower(overdueBook) }
   }
 
+  def getAllOnLoan(): List[Book]= {
+    val onLoanBooks = for {(loanedBook, v) <- loans} yield {loanedBook}
+    onLoanBooks.toList
+  }
+
+  def getCurrentBorrowers(): List[String] = {
+    val currentBorrowers = for {(k, v) <- loans} yield {v("borrower")}
+    currentBorrowers.toList
+  }
+
 }
