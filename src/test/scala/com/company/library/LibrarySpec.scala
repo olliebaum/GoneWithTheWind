@@ -62,4 +62,12 @@ class LibrarySpec extends FunSuite with BeforeAndAfter {
     library1.getBorrower(library1.books(0)) shouldBe "Les Dawson"
   }
 
+  test("#getOverdue returns list of any overdue books") {
+    library1.lend(library1.books(0), "Bill Gates", "1999-07-20")
+    library1.getOverdue()(0).title shouldBe "Da Vinci Code,The"
+  }
+
+  test("#getOverdueBorrowers returns list of borrowers with overdue books") {
+    library1.lend(library1.books(0), "Bill Gates", "1999-07-20")
+    library1.getOverdueBorrowers()(0) shouldBe "Bill Gates"  }
 }

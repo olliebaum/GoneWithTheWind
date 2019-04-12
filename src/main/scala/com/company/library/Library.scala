@@ -73,7 +73,8 @@ class Library(val books: List[Book] = Books.all) {
     overdueBooks.toList
   }
 
-  def getOverdueCustomers(): List[String] = {
+  def getOverdueBorrowers(): List[String] = {
     for {overdueBook <- getOverdue()} yield { getBorrower(overdueBook) }
   }
+
 }
