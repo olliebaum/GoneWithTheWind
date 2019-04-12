@@ -51,4 +51,8 @@ class Library(val books: List[Book] = Books.all) {
       loans -= bookToReturn
     }
   }
+
+  def getBorrower(bookOnLoan: Book): String = {
+    loans(bookOnLoan)
+  }
 }
