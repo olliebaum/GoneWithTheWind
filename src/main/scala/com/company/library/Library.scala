@@ -1,6 +1,6 @@
 package com.company.library
 
-class Library(val books: List[Book] = Books.all) {
+class Library(val books: List[Book] = Books.all, bookClass = Book) {
 
   private var loans = scala.collection.mutable.Map[Book, String]()
 
@@ -18,7 +18,7 @@ class Library(val books: List[Book] = Books.all) {
       book
     }
   }
-
+  
   def searchTitle(queryText: String): List[Book] = {
     this.search(queryText, "title")
   }
@@ -29,7 +29,7 @@ class Library(val books: List[Book] = Books.all) {
     this.search(queryText, "isbn")
   }
 
-  def lend(bookToLend: Book, borrower: String) = {
+  def lend(bookToLend: Book, borrower: String): Unit = {
     if (bookToLend.isReference) {
       throw new Exception("Reference books cannot be loaned out!")
     } else if(checkAvailable(bookToLend)) {

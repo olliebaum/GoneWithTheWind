@@ -51,3 +51,13 @@ I initially had a `for` loop for each #search...* method but refactored so they 
 ### #lend
 
 Since we weren't using databases here I decided to use a Map type to store my data. One of the advantages of this is that I am able to use a syntax similar to a ruby hash or javascript object i.e. `foo["bar"]` allowing me to easily pass an argument variable to the Map to retrieve the relevant data easily. And in addition, I don't have to use a string, I can just simply use a `Book` object as my key meaning that finding a book's borrower is as simple as `loans(someBookObject)`. This approach works fine for simply remembering who a book is loaned to, but when loaned dates + due dates come in to play, it may be more useful to have some kind of Loan object that can handle more complex operations.
+
+
+
+### Dependency injection
+
+Since this was quite a basic application, I decided to simply accept a List of Book objects as a parameter to my Library class (and by default use `Books.all`). This allows me to pass a separate list of books to the Library class in my tests. Since the Book class is very simple, it's not a huge issue, but strictly this is not separating the classes for testing as I am still relying upon the "real" Book class. 
+
+Usually my approach would be to accept a dependent class as a parameter to my class, i.e. Library(bookClass = Book). The issue here is that if I had accepted a class in this way, in my tests the type of any passed in class would not match the type Book expected by many of my methods. Hence, why I opted for the simpler approach. 
+
+However, if the Book class were more complicated it would be necessary to fully separate the Book class from my Library tests. In that case I would use the approach of creating a Book trait upon which I could create my real Book class and also change any Type expectations to my Book Trait. Then in the tests I would be able to extend the Book trait to create a mock class which could be passed to my Library class. Since it is an extension of the Book Trait any type expectations in the code will be satisfied while any actual implementation of the class will be entirely different! 😀
