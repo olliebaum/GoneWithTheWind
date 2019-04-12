@@ -42,4 +42,5 @@ class LibrarySpec extends FunSuite with BeforeAndAfter {
     }
     thrown.getMessage shouldBe "Book is already on loan!"
   }
+
 }
