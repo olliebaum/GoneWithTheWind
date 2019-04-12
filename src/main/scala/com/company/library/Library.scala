@@ -18,7 +18,7 @@ class Library(val books: List[Book] = Books.all, bookClass = Book) {
       book
     }
   }
-  
+
   def searchTitle(queryText: String): List[Book] = {
     this.search(queryText, "title")
   }

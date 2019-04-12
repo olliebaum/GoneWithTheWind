@@ -61,3 +61,11 @@ Since this was quite a basic application, I decided to simply accept a List of B
 Usually my approach would be to accept a dependent class as a parameter to my class, i.e. Library(bookClass = Book). The issue here is that if I had accepted a class in this way, in my tests the type of any passed in class would not match the type Book expected by many of my methods. Hence, why I opted for the simpler approach. 
 
 However, if the Book class were more complicated it would be necessary to fully separate the Book class from my Library tests. In that case I would use the approach of creating a Book trait upon which I could create my real Book class and also change any Type expectations to my Book Trait. Then in the tests I would be able to extend the Book trait to create a mock class which could be passed to my Library class. Since it is an extension of the Book Trait any type expectations in the code will be satisfied while any actual implementation of the class will be entirely different! 😀
+
+
+
+### Other improvements
+
+Currently, it is possible to loan out a book that doesn't exist in the library. I could implement a check that occurs in the #lend method which throws an error if the book being loaned isn't in the library.
+
+It might be nice to design the functions such that they can easily be chained together so I could do something like library1.searchTitle("Fire").searchAuthor("J.K. Rowling")(0).loanTo("Jim Carrey").
