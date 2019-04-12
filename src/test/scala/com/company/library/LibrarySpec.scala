@@ -35,4 +35,13 @@ class LibrarySpec extends FunSuite {
     val library1 = new Library()
     library1.checkAvailable(Books.all(0)) shouldBe true
   }
+
+  test("#lend throws exception when book is on loan") {
+    val library1 = new Library()
+    library1.lend(Books.all(0), "Desmond Tutu")
+    val thrown = intercept[Exception] {
+      library1.lend(Books.all(0), "Jeremy Corbyn")
+    }
+    thrown.getMessage shouldBe "Book is already on loan!"
+  }
 }

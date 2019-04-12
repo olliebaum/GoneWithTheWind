@@ -32,7 +32,11 @@ class Library {
     }
   }
   def lend(bookToLend: Book, borrower: String) = {
-    loans(bookToLend) = borrower
+    if(checkAvailable(bookToLend)) {
+      loans(bookToLend) = borrower
+    } else {
+      throw new Exception("Book is already on loan!")
+    }
   }
 
   def checkAvailable(book: Book):Boolean = {
