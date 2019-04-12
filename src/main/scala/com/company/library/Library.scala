@@ -7,7 +7,7 @@ class Library(val books: List[Book] = Books.all) {
   private var loans = scala.collection.mutable.Map[Book, Map[String, String]]()
 
   private val today = LocalDate.now()
-  private val todayStr = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+  private val todayStr = today.format(DateTimeFormatter.ISO_LOCAL_DATE)
 
   private def search(queryText: String, searchType: String): List[Book] = {
     for {
@@ -71,5 +71,9 @@ class Library(val books: List[Book] = Books.all) {
       if (isOverdue(loanedBook))
     } yield {loanedBook}
     overdueBooks.toList
+  }
+
+  def getOverdueCustomers(): List[String] = {
+    for {overdueBook <- getOverdue()} yield { getBorrower(overdueBook) }
   }
 }
